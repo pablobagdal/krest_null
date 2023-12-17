@@ -51,6 +51,24 @@ def evaluate(board):
     return 0
 
 
+def whos_step(board: list):
+    size = len(board)
+
+    count_X = 0
+    count_O = 0
+
+    for i in range(size):
+        for j in range(size):
+            if board[i][j] == 'X':
+                count_X += 1
+            elif board[i][j] == 'O':
+                count_O += 1
+
+    if count_O == count_X:
+        return 'X'
+    return 'O'
+
+
 def minimax(board, depth, is_maximizing):
     # board is play ground
     # depth - how many steps available
@@ -67,23 +85,28 @@ def minimax(board, depth, is_maximizing):
     if is_maximizing:
         best_score = -float('inf')
 
-    for i in range(3):
-        for j in range(3):
-            if board[i][j] == ' ':
-                board[i][j] = 'X'
-                score = minimax(board, depth - 1, False)
-                board[i][j] = ' '
-                best_score = max(score, best_score)
-                return best_score
-            else:
-                best_score = float('inf')
-    for i in range(3):
-        for j in range(3):
-            if board[i][j] == ' ':
-                board[i][j] = 'O'
-                score = minimax(board, depth - 1, True)
-                board[i][j] = ' '
-                best_score = min(score, best_score)
+    we_play_as = whos_step(board)
+
+    if we_play_as == 'X':
+        for i in range(3):
+            for j in range(3):
+                if board[i][j] == ' ':
+                    board[i][j] = 'X'
+                    score = minimax(board, depth - 1, False)
+                    board[i][j] = ' '
+                    best_score = max(score, best_score)
+                    return best_score
+                else:
+                    best_score = float('inf')
+    else:
+        for i in range(3):
+            for j in range(3):
+                if board[i][j] == ' ':
+                    board[i][j] = 'O'
+                    score = minimax(board, depth - 1, True)
+                    board[i][j] = ' '
+                    best_score = min(score, best_score)
+
     return best_score
 
 
