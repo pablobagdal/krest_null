@@ -1,7 +1,6 @@
 # import copy
 
 
-
 def evaluate(board):
     # return 1 if X's win
     # return -1 if O's win
@@ -10,37 +9,37 @@ def evaluate(board):
     # Определяем выигрышные комбинации
     lines = [
         [(0, 0), (0, 1), (0, 2)],
-        #xxx
-        #---
-        #---
+        # xxx
+        # ---
+        # ---
         [(1, 0), (1, 1), (1, 2)],
-        #---
-        #xxx
-        #---
+        # ---
+        # xxx
+        # ---
         [(2, 0), (2, 1), (2, 2)],
-        #---
-        #---
-        #xxx        
+        # ---
+        # ---
+        # xxx
         [(0, 0), (1, 0), (2, 0)],
-        #x--
-        #x--
-        #x--
+        # x--
+        # x--
+        # x--
         [(0, 1), (1, 1), (2, 1)],
-        #-x-
-        #-x-
-        #-x-
+        # -x-
+        # -x-
+        # -x-
         [(0, 2), (1, 2), (2, 2)],
-        #--x
-        #--x
-        #--x
+        # --x
+        # --x
+        # --x
         [(0, 0), (1, 1), (2, 2)],
-        #x--
-        #-x-
-        #--x
+        # x--
+        # -x-
+        # --x
         [(0, 2), (1, 1), (2, 0)]
-        #--x
-        #-x-
-        #x--
+        # --x
+        # -x-
+        # x--
         ]
 
     for line in lines:
@@ -99,7 +98,7 @@ def minimax(board, depth, is_maximizing):
             for j in range(3):
                 if board[i][j] == ' ':
                     board[i][j] = 'X'
-                    score = minimax(board, depth - 1, False)
+                    score = minimax(board, 5-count_on_board('O', board), False)
                     board[i][j] = ' '
                     best_score = max(score, best_score)
                     return best_score
@@ -110,7 +109,7 @@ def minimax(board, depth, is_maximizing):
             for j in range(3):
                 if board[i][j] == ' ':
                     board[i][j] = 'O'
-                    score = minimax(board, depth - 1, True)
+                    score = minimax(board, 4-count_on_board('X', board), True)
                     board[i][j] = ' '
                     best_score = min(score, best_score)
 
@@ -155,9 +154,9 @@ def find_best_move(board):
 #     [' ', ' ', ' ']
 #     ]
 board = [
-    ['X', 'O', 'X'],
+    [' ', 'O', 'X'],
     ['O', ' ', ' '],
-    [' ', ' ', ' ']
+    ['X', ' ', ' ']
     ]
 
 print("Считаем, что ходим за крестики")
