@@ -51,18 +51,23 @@ def evaluate(board):
     return 0
 
 
-def whos_step(board: list):
+def count_on_board(item: str, board: list):
     size = len(board)
 
-    count_X = 0
-    count_O = 0
+    count = 0
 
     for i in range(size):
         for j in range(size):
-            if board[i][j] == 'X':
-                count_X += 1
-            elif board[i][j] == 'O':
-                count_O += 1
+            if board[i][j] == item:
+                count += 1
+
+    return count
+
+def whos_step(board: list):
+    size = len(board)
+
+    count_X = count_on_board('X', board)
+    count_O = count_on_board('O', board)
 
     if count_O == count_X:
         return 'X'
@@ -117,10 +122,18 @@ def find_best_move(board):
         for j in range(3):
             if board[i][j] == ' ':
                 board[i][j] = 'X'
-                # ниже число 5 по идее нужно высчитывать исходя из текущего количества оставшихся пустых полей
-                score = minimax(board, 5, False)
+                depth = 5 - count_on_board('X', board)
+                score = minimax(board, depth, False)
                 # Устанавливаем глубину анализа
                 board[i][j] = ' '
+
+                # # ---
+                # if score == 1:
+                #     # we win
+                #     return (i, j)
+                
+                # # ---
+
                 if score > best_score:
                     best_score = score
                     best_move = (i, j)
