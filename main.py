@@ -98,7 +98,7 @@ def minimax(board, depth, is_maximizing):
             for j in range(3):
                 if board[i][j] == ' ':
                     board[i][j] = 'X'
-                    score = minimax(board, 5-count_on_board('O', board), False)
+                    score = minimax(board, 4-count_on_board('O', board), False)
                     board[i][j] = ' '
                     best_score = max(score, best_score)
                     return best_score
@@ -109,7 +109,7 @@ def minimax(board, depth, is_maximizing):
             for j in range(3):
                 if board[i][j] == ' ':
                     board[i][j] = 'O'
-                    score = minimax(board, 4-count_on_board('X', board), True)
+                    score = minimax(board, 5-count_on_board('X', board), True)
                     board[i][j] = ' '
                     best_score = min(score, best_score)
 
