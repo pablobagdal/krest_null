@@ -74,8 +74,14 @@ def whos_step(board: list):
 
 
 def minimax(board, depth, is_maximizing):
-    global best_score
-    global best_move
+    # global best_score # 0
+    best_score = -float('inf')  # 1
+    # best_score = float('inf') # 2
+    # best_score = -1 # 3
+    # best_score = 1 # 4
+    # best_score = 0 # 5
+    # best_score = from_calling_functions!!! # 6
+    
     # board is play ground
     # depth - how many steps available
     # is_maximizing -
@@ -117,8 +123,7 @@ def minimax(board, depth, is_maximizing):
 
 
 def find_best_move(board):
-    global best_score
-    global best_move
+    # global best_score
     best_score = -float('inf')
     best_move = None
     for i in range(3):
@@ -154,10 +159,20 @@ def find_best_move(board):
 #     [' ', ' ', ' ']
 #     ]
 board = [
-    [' ', 'O', 'X'],
+    ['X', 'O', 'X'],
     ['O', ' ', ' '],
-    ['X', ' ', ' ']
+    [' ', ' ', ' ']
     ]
+# board = [
+#     [' ', 'O', 'X'],
+#     ['O', ' ', 'X'],
+#     [' ', ' ', ' ']
+#     ]
+# board = [
+#     [' ', 'O', 'X'],
+#     ['O', ' ', ' '],
+#     ['X', ' ', ' ']
+#     ]
 
 print("Считаем, что ходим за крестики")
 
