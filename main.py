@@ -1,6 +1,7 @@
 # import copy
 
 
+
 def evaluate(board):
     # return 1 if X's win
     # return -1 if O's win
@@ -63,9 +64,8 @@ def count_on_board(item: str, board: list):
 
     return count
 
-def whos_step(board: list):
-    size = len(board)
 
+def whos_step(board: list):
     count_X = count_on_board('X', board)
     count_O = count_on_board('O', board)
 
@@ -75,6 +75,8 @@ def whos_step(board: list):
 
 
 def minimax(board, depth, is_maximizing):
+    global best_score
+    global best_move
     # board is play ground
     # depth - how many steps available
     # is_maximizing -
@@ -116,6 +118,8 @@ def minimax(board, depth, is_maximizing):
 
 
 def find_best_move(board):
+    global best_score
+    global best_move
     best_score = -float('inf')
     best_move = None
     for i in range(3):
@@ -131,7 +135,6 @@ def find_best_move(board):
                 # if score == 1:
                 #     # we win
                 #     return (i, j)
-                
                 # # ---
 
                 if score > best_score:
@@ -146,9 +149,14 @@ def find_best_move(board):
 #     [' ', ' ', ' '],
 #     [' ', ' ', ' ']
 #     ]
+# board = [
+#     ['X', 'O', 'X'],
+#     ['O', 'X', 'O'],
+#     [' ', ' ', ' ']
+#     ]
 board = [
     ['X', 'O', 'X'],
-    ['O', 'X', 'O'],
+    ['O', ' ', ' '],
     [' ', ' ', ' ']
     ]
 
@@ -159,5 +167,6 @@ print("  0 1 2")
 print(f"0 {board[0][0]} {board[0][1]} {board[0][2]}")
 print(f"1 {board[1][0]} {board[1][1]} {board[1][2]}")
 print(f"2 {board[2][0]} {board[2][1]} {board[2][2]}")
+best_score = 0
 best_move = find_best_move(board)
 print(f"The best move is {best_move}")
